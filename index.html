@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>동탄중앙초 5학년 1반 안내 도우미</title>
+<title>동탄중앙초 5학년 안내 도우미</title>
 <style>
   :root{ --green:#3f5a3f; --green-light:#5a7a5a; --bg:#f4f6f2; --bubble-bot:#eef3ec; --bubble-user:#3f5a3f; }
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -16,10 +16,6 @@
   .msg{max-width:85%;padding:11px 14px;border-radius:14px;font-size:14px;line-height:1.55;word-break:break-word;}
   .msg.bot{background:var(--bubble-bot);align-self:flex-start;border-bottom-left-radius:4px;}
   .msg.user{background:var(--bubble-user);color:#fff;align-self:flex-end;border-bottom-right-radius:4px;}
-  .msg table{border-collapse:collapse;width:100%;font-size:11.5px;margin-top:6px;}
-  .msg th,.msg td{border:1px solid #cfd8cc;padding:4px 5px;text-align:center;vertical-align:middle;}
-  .msg th{background:var(--green);color:#fff;}
-  .msg td.subj{font-weight:700;color:var(--green);}
   .msg a{color:var(--green);font-weight:700;}
   .quick{display:flex;flex-wrap:wrap;gap:7px;padding:10px 16px;border-top:1px solid #eee;background:#fafbf9;}
   .quick button{border:1px solid var(--green);background:#fff;color:var(--green);border-radius:18px;padding:7px 13px;font-size:13px;cursor:pointer;}
@@ -32,7 +28,7 @@
 <body>
 <div class="app">
   <header>
-    <h1>🌱 5학년 1반 안내 도우미</h1>
+    <h1>🌱 5학년 안내 도우미</h1>
     <p>동탄중앙초등학교 · 학부모 안내</p>
   </header>
   <div class="chat" id="chat"></div>
@@ -46,41 +42,9 @@
 <script>
 const NEIS = "https://parents.neis.go.kr";
 const SCHOOL = "https://dtc-e.goehs.kr";
-const HICLASS = "https://www.hiclass.net/main/clazzes/feb92c6e-2846-45bc-a122-5b103a279d69";
-
-const week3 = `<strong>📅 이번 주 주간학습 (8/31~9/4)</strong>
-<table>
-<tr><th>교시</th><th>월<br>31</th><th>화<br>1</th><th>수<br>2</th><th>목<br>3</th><th>금<br>4</th></tr>
-<tr><td>1</td><td class="subj">과학</td><td class="subj">영어</td><td class="subj">체육</td><td class="subj">사회</td><td class="subj">음악</td></tr>
-<tr><td>2</td><td class="subj">과학</td><td class="subj">체육</td><td class="subj">수학</td><td class="subj">영어</td><td class="subj">수학</td></tr>
-<tr><td>3</td><td class="subj">국어</td><td class="subj">수학</td><td class="subj">영어</td><td class="subj">사회<br>(도서관)</td><td class="subj">과학</td></tr>
-<tr><td>4</td><td class="subj">국어</td><td class="subj">실과</td><td class="subj">국어</td><td class="subj">과학</td><td class="subj">국어</td></tr>
-<tr><td>5</td><td class="subj">미술</td><td class="subj">국어</td><td class="subj">실과</td><td class="subj">사회</td><td class="subj">국어</td></tr>
-<tr><td>6</td><td class="subj">미술</td><td class="subj">도덕</td><td>–</td><td class="subj">체육<br>(체육관)</td><td class="subj">창체</td></tr>
-</table>
-<div style="margin-top:8px;font-size:12.5px;">
-<strong>🎒 준비물</strong><br>
-· 수(2일): 수학 활동지<br>
-· 목(3일): 편한 복장<br>
-· 금(4일): 편한 복장, 동아리 준비물
-</div>`;
-
-const notice = `<strong>📢 이번 주 가정통신</strong>
-<div style="font-size:13px;line-height:1.65;margin-top:5px;">
-· <strong>9/4(금) 4·5교시</strong> 5학년 전체가 체육관에서 <strong>"서찰을 전하는 아이"</strong> 연극을 감상합니다.<br>
-· <strong>9/4(금)</strong> 2학기 동아리 활동을 시작합니다. 부서는 새롭게 편성되며, 1학기와 동일한 활동을 원하면 기존 동아리를 그대로 운영할 수 있어요.<br>
-· 등·하교 시 횡단보도에서는 좌우를 살피고 신호를 지켜 안전하게 건너도록 지도해 주세요.<br>
-· 복도·계단에서는 뛰지 않고 친구를 밀거나 장난치지 않도록 합니다.<br>
-※ 담임 교육과정은 학급 상황과 학생 학습 수준에 따라 탄력적으로 운영됩니다.
-</div>`;
 
 const knowledge = {
-  greeting: "안녕하세요, 5학년 1반 학부모님 🌱<br>주간학습·결석신고·현장체험학습·상담 안내를 도와드려요.",
-  week: `<strong>📅 이번 주 주간학습</strong><br>
-주간학습 안내는 <strong>하이클래스</strong>에서 매주 확인하실 수 있어요.<br><br>
-👉 <a href="${HICLASS}" target="_blank">5학년 1반 하이클래스에서 이번 주 안내 보기</a><br><br>
-링크를 누르면 우리 반 페이지로 연결돼요. 로그인이 필요하면 앱에서 먼저 로그인해 주세요.`,
-  notice: notice,
+  greeting: "안녕하세요, 5학년 학부모님 🌱<br>결석신고·현장체험학습·상담·급식·문의를 도와드려요.<br>아래 버튼에서 필요한 안내를 골라주세요.",
   absence: `<strong>🤒 결석 신고 안내</strong><br>
 자녀가 아파서 결석·조퇴할 때는 <strong>NEIS 학부모서비스</strong>에서 신청하실 수 있어요.<br><br>
 👉 <a href="${NEIS}" target="_blank">NEIS 학부모서비스 바로가기</a><br><br>
@@ -99,22 +63,15 @@ const knowledge = {
   contact: `<strong>📞 문의</strong><br>
 · 담임 상담: 알림장 앱 / 전화<br>
 · 학교 대표번호: 학교 홈페이지 참고<br>
-👉 <a href="${SCHOOL}" target="_blank">학교 홈페이지 바로가기</a>`,
-  hiclass: `<strong>📱 하이클래스</strong><br>
-알림장·준비물·사진 등 우리 반 소식은 하이클래스에서 확인하실 수 있어요.<br><br>
-👉 <a href="${HICLASS}" target="_blank">5학년 1반 하이클래스 바로가기</a><br><br>
-링크를 누르면 우리 반 페이지로 연결돼요. 로그인이 필요하면 앱에서 먼저 로그인해 주세요.`
+👉 <a href="${SCHOOL}" target="_blank">학교 홈페이지 바로가기</a>`
 };
 
 const quickBtns = [
-  {label:"📅 이번 주 안내", key:"week"},
-  {label:"📢 가정통신", key:"notice"},
   {label:"🤒 결석 신고", key:"absence"},
   {label:"🚌 현장체험학습", key:"field"},
   {label:"💬 상담 신청", key:"counsel"},
   {label:"🍚 급식", key:"meal"},
-  {label:"📞 문의", key:"contact"},
-  {label:"📱 하이클래스", key:"hiclass"}
+  {label:"📞 문의", key:"contact"}
 ];
 
 const chat=document.getElementById('chat');
@@ -128,16 +85,13 @@ function addMsg(html,who){
 
 function reply(text){
   const t=text.replace(/\s/g,'');
-  if(/주간|시간표|수업|이번주|학습/.test(t)) return knowledge.week;
-  if(/가정통신|통신|공지|알림|연극|동아리/.test(t)) return knowledge.notice;
   if(/결석|아프|병가|조퇴|아파/.test(t)) return knowledge.absence;
   if(/체험|여행|교외|현장/.test(t)) return knowledge.field;
   if(/상담|면담/.test(t)) return knowledge.counsel;
   if(/급식|식단|밥|점심/.test(t)) return knowledge.meal;
-  if(/하이클래스|알림장|hiclass/i.test(t)) return knowledge.hiclass;
   if(/문의|연락|전화|번호/.test(t)) return knowledge.contact;
-  if(/준비물/.test(t)) return "🎒 이번 주 준비물은 하이클래스 주간학습에서 확인하실 수 있어요!<br><br>"+knowledge.week;
-  return "궁금하신 내용을 아래 버튼에서 골라주세요 🌱<br>주간학습 · 가정통신 · 결석신고 · 현장체험학습 · 상담 · 급식 · 문의를 안내해 드려요.";
+  if(/주간|시간표|수업|준비물|학습/.test(t)) return "📅 주간학습·준비물 안내는 각 반 하이클래스(알림장)에서 확인해 주세요 🌱";
+  return "궁금하신 내용을 아래 버튼에서 골라주세요 🌱<br>결석신고 · 현장체험학습 · 상담 · 급식 · 문의를 안내해 드려요.";
 }
 
 function send(){
@@ -149,7 +103,6 @@ function send(){
   setTimeout(()=>addMsg(reply(v),'bot'),350);
 }
 
-// quick buttons
 const q=document.getElementById('quick');
 quickBtns.forEach(b=>{
   const btn=document.createElement('button');
@@ -158,14 +111,7 @@ quickBtns.forEach(b=>{
   q.appendChild(btn);
 });
 
-// greeting + 이번 주 안내 자동 표시
-setTimeout(()=>{
-  addMsg(knowledge.greeting,'bot');
-  setTimeout(()=>{
-    addMsg('먼저 <strong>이번 주 안내</strong>를 보여드릴게요 👇','bot');
-    setTimeout(()=>addMsg(knowledge.week,'bot'),600);
-  },800);
-},300);
+setTimeout(()=>addMsg(knowledge.greeting,'bot'),300);
 </script>
 </body>
 </html>
