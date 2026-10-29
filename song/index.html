@@ -53,6 +53,24 @@ h1{margin:4px 0 6px;font-family:'Do Hyeon',sans-serif;font-weight:400;font-size:
 .style{margin:0;font-size:15px;font-weight:700;color:var(--ochre)}
 footer{margin-top:28px;font-size:13px;color:var(--muted);text-align:center}
 @media (max-width:480px){.bridge{grid-template-columns:1fr}.bridge .arrow{transform:rotate(90deg);justify-self:center}}
+
+/* 휴대폰 화면 다듬기 */
+body{word-break:keep-all;overflow-wrap:break-word}
+h1{font-size:clamp(34px,10vw,56px)}
+.card-top{flex-wrap:nowrap;align-items:flex-start}
+.card-top .scene{flex:1 1 auto;min-width:0}
+.team{flex-shrink:0;white-space:nowrap;margin-top:3px}
+.styles li{display:grid;grid-template-columns:4.2em 1fr;gap:6px;align-items:baseline}
+.styles b{min-width:0}
+.how li{flex:1 1 100%}
+@media (max-width:480px){
+  .wrap{padding:22px 14px 48px}
+  .scene{font-size:19px}
+  .card{padding:16px 14px 14px}
+  .intro{padding:16px}
+  .styles{padding:14px}
+  .styles li{font-size:14.5px}
+}
 </style>
 </head>
 <body>
