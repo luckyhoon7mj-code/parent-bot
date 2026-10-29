@@ -93,6 +93,10 @@ textarea{font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid v
 .songlink{display:block;text-align:center;text-decoration:none;border-radius:10px;padding:12px 14px;font-weight:700;background:var(--ink);color:var(--bg)}
 .songlink:hover,.songlink:focus-visible{background:var(--ochre);color:#fff}
 .flow{margin:0;padding-left:1.2em;font-size:.95rem}
+.jump{display:flex;flex-wrap:wrap;gap:6px;position:sticky;top:0;z-index:2;background:var(--paper);padding:6px 0}
+.jump a{font-size:.88rem;font-weight:700;text-decoration:none;color:var(--ochre);border:1.5px solid var(--ochre);border-radius:999px;padding:4px 10px}
+.jump a.has{background:var(--ochre);color:#fff}
+.cat{scroll-margin-top:150px}
 </style>
 <div class="wrap">
   <header>
@@ -115,6 +119,7 @@ textarea{font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid v
         <div class="step">
           <h2><span class="num">2</span>소리 단어 고르기</h2>
           <p class="hint">원하는 칸에서 골라요. 모두 합쳐 <b>10개까지</b>, 목소리는 꼭 하나만! 지금 <span class="count tnum" id="count">0</span>/10</p>
+          <nav class="jump" id="jump" aria-label="소리 단어 칸 바로 가기"></nav>
           <div id="cats" style="display:grid;gap:12px"></div>
           <div class="cat">
             <div class="cat-h">우리만의 단어<span>1개, 영어로 쓰면 더 잘 알아들어요</span></div>
@@ -230,7 +235,7 @@ function render(){
   })));
   const cats=$("cats");cats.innerHTML="";
   CATS.forEach(c=>{
-    const box=document.createElement("div");box.className="cat";
+    const box=document.createElement("div");box.className="cat";box.id="cat-"+c.id;
     const h=document.createElement("div");h.className="cat-h";h.textContent=c.name;
     const s=document.createElement("span");s.textContent=c.max+"개까지";h.append(s);box.append(h);
     const row=document.createElement("div");row.className="row";
@@ -241,7 +246,8 @@ function render(){
   });
   updateOut();
 }
-function updateOut(){const n=total();$("count").textContent=n;$("count").classList.toggle("full",n>=MAXW);$("out").textContent=orderText()}
+function renderJump(){const j=$("jump");j.innerHTML="";CATS.forEach(c=>{const x=document.createElement("a");x.href="#cat-"+c.id;x.textContent=c.name+(st.pick[c.id].length?" ✓":"");if(st.pick[c.id].length)x.className="has";j.append(x)})}
+function updateOut(){renderJump();const n=total();$("count").textContent=n;$("count").classList.toggle("full",n>=MAXW);$("out").textContent=orderText()}
 function toggle(c,en){
   const arr=st.pick[c.id];$("warn").textContent="";
   if(arr.includes(en)){arr.splice(arr.indexOf(en),1)}
