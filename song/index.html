@@ -45,6 +45,12 @@ h1{margin:4px 0 6px;font-family:'Do Hyeon',sans-serif;font-weight:400;font-size:
 .bonus .team{background:var(--ink)}
 .quote{margin:0;font-size:15.5px;font-weight:700;color:var(--ochre)}
 .appfree{margin:-10px 0 20px;font-size:14px;color:var(--muted)}
+.styles{background:var(--card);border:2px solid var(--ink);border-radius:18px;padding:16px 18px;margin-bottom:22px}
+.styles h2{margin:0 0 8px;font-size:18px}
+.styles ul{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.styles li{font-size:15px}
+.styles b{display:inline-block;min-width:58px;color:var(--ochre)}
+.style{margin:0;font-size:15px;font-weight:700;color:var(--ochre)}
 footer{margin-top:28px;font-size:13px;color:var(--muted);text-align:center}
 @media (max-width:480px){.bridge{grid-template-columns:1fr}.bridge .arrow{transform:rotate(90deg);justify-self:center}}
 </style>
@@ -57,21 +63,35 @@ footer{margin-top:28px;font-size:13px;color:var(--muted);text-align:center}
 
   <section class="intro" aria-labelledby="intro-h">
     <h2 id="intro-h">이 노래들은 이렇게 태어났어요</h2>
-    <p>사회 시간에 배운 구석기 사람들의 생활 장면을 골라 가사를 쓰고, 음악 시간에 소리 단어를 골라 AI로 노래를 만들었어요. 그리고 노래마다 <b>"만 년 전 그때"</b>와 <b>"오늘의 우리"</b>를 이어 보았어요.</p>
+    <p>사회 시간에 배운 구석기 사람들의 생활 장면을 골라 <b>가사를 한 줄 한 줄 직접 쓰고</b>, 어떤 소리가 그 마음에 어울릴지 모둠 친구들과 <b>여러 번 고민하고 고쳐 가며</b> 노래를 완성했어요. 노래마다 <b>"만 년 전 그때"</b>와 <b>"오늘의 우리"</b>를 이어 보았어요. 친구들의 정성이 담긴 노래예요.</p>
     <p class="q">탐구 질문 · 음악을 들으며 우리는 어떻게 다른 사람의 마음에 공감하게 될까?</p>
   </section>
 
   <ul class="how" aria-label="듣는 방법">
-    <li><b>1</b> 마음이 끌리는 장면 카드를 골라요</li>
-    <li><b>2</b> '노래 듣기'를 눌러 끝까지 들어요</li>
-    <li><b>3</b> 아래 질문 하나에 답을 포스트잇에 남겨요</li>
+    <li><b>1</b> 아래 '음악 스타일'을 보고 듣고 싶은 노래를 골라요</li>
+    <li><b>2</b> '노래 듣기'를 누르면 노래 페이지가 열려요</li>
+    <li><b>3</b> 화면의 <b>재생 버튼(▶)</b>을 눌러 주세요</li>
   </ul>
-  <p class="appfree">앱을 깔지 않아도 돼요. '노래 듣기'를 누르면 인터넷 창에서 바로 재생돼요. (재생 버튼이 보이면 한 번 더 눌러 주세요.)</p>
+  <p class="appfree">노래 페이지가 열렸는데 소리가 나지 않으면, 화면의 재생 버튼(▶)을 한 번 더 눌러 주세요.</p>
+
+  <section class="styles" aria-labelledby="style-h">
+    <h2 id="style-h">어떤 노래가 끌리나요? 모둠별 음악 스타일</h2>
+    <ul>
+      <li><b>1모둠</b> 두근두근 긴장되는 케이팝 · 통기타와 랩</li>
+      <li><b>2모둠</b> 잔잔하고 아련한 드라마 OST · 남녀 함께 부르기</li>
+      <li><b>3모둠</b> 큰북이 쿵쿵 울리는 무서운 힙합</li>
+      <li><b>4모둠</b> 힘차게 쌓아 올리는 힙합 · 동굴 메아리</li>
+      <li><b>5모둠</b> 따뜻하고 포근한 발라드 · 칼림바</li>
+      <li><b>6모둠</b> 설렘과 불안이 섞인 피아노 힙합</li>
+      <li><b>보너스</b> 꽹과리가 울리는 신나는 축제 힙합</li>
+    </ul>
+  </section>
 
   <section class="cards" aria-label="모둠별 노래">
 
     <article class="card">
       <div class="card-top"><p class="scene">사냥감을 발견한 순간</p><span class="team">1모둠</span></div>
+      <p class="style">음악 스타일 · 두근두근 긴장되는 케이팝 · 통기타와 랩</p>
       <p class="mind">담은 마음 · 원시인들의 긴장되는 마음</p>
       <div class="bridge"><div><small>만 년 전 그때</small>사냥감을 발견한 순간</div><span class="arrow" aria-hidden="true">→</span><div><small>오늘의 우리</small>시험 점수 나오기 전</div></div>
       <p class="same">조마조마, 그 마음은 그때도 지금도 같아요.</p>
@@ -81,6 +101,7 @@ footer{margin-top:28px;font-size:13px;color:var(--muted);text-align:center}
 
     <article class="card">
       <div class="card-top"><p class="scene">먹을거리가 줄어 떠나는 순간</p><span class="team">2모둠</span></div>
+      <p class="style">음악 스타일 · 잔잔하고 아련한 드라마 OST · 남녀 함께 부르기</p>
       <p class="mind">담은 마음 · 아쉬운 마음</p>
       <div class="bridge"><div><small>만 년 전 그때</small>정든 곳을 떠날 때</div><span class="arrow" aria-hidden="true">→</span><div><small>오늘의 우리</small>우리 집이 이사 갈 때</div></div>
       <p class="same">아쉬운 그 마음은 그때도 지금도 같아요.</p>
@@ -90,6 +111,7 @@ footer{margin-top:28px;font-size:13px;color:var(--muted);text-align:center}
 
     <article class="card">
       <div class="card-top"><p class="scene">사냥감을 발견한 순간</p><span class="team">3모둠</span></div>
+      <p class="style">음악 스타일 · 큰북이 쿵쿵 울리는 무서운 힙합</p>
       <p class="mind">담은 마음 · 긴장과 떨리는 마음</p>
       <div class="bridge"><div><small>만 년 전 그때</small>매머드를 발견했을 때</div><span class="arrow" aria-hidden="true">→</span><div><small>오늘의 우리</small>단원평가 기간이 찾아왔을 때</div></div>
       <p class="same">무섭고 떨리는 그 마음은 그때도 지금도 같아요.</p>
@@ -99,6 +121,7 @@ footer{margin-top:28px;font-size:13px;color:var(--muted);text-align:center}
 
     <article class="card">
       <div class="card-top"><p class="scene">돌을 깨며 도구를 만드는 순간</p><span class="team">4모둠</span></div>
+      <p class="style">음악 스타일 · 힘차게 쌓아 올리는 힙합 · 동굴 메아리</p>
       <p class="mind">담은 마음 · 성공하고 싶은 마음</p>
       <div class="bridge"><div><small>만 년 전 그때</small>멋진 돌도구를 만들 때</div><span class="arrow" aria-hidden="true">→</span><div><small>오늘의 우리</small>대장장이가 칼을 다듬을 때</div></div>
       <p class="same">성공하고 싶은 그 마음은 그때도 지금도 같아요.</p>
@@ -108,6 +131,7 @@ footer{margin-top:28px;font-size:13px;color:var(--muted);text-align:center}
 
     <article class="card">
       <div class="card-top"><p class="scene">새로운 곳에 도착한 순간</p><span class="team">5모둠</span></div>
+      <p class="style">음악 스타일 · 따뜻하고 포근한 발라드 · 칼림바</p>
       <p class="mind">담은 마음 · 가족들을 지키고 싶은 마음</p>
       <div class="bridge"><div><small>만 년 전 그때</small>먹을거리를 찾아 새로운 곳에 닿았을 때</div><span class="arrow" aria-hidden="true">→</span><div><small>오늘의 우리</small>새 학기를 시작할 때</div></div>
       <p class="same">설레지만 아쉬운 그 마음은 그때도 지금도 같아요.</p>
@@ -117,6 +141,7 @@ footer{margin-top:28px;font-size:13px;color:var(--muted);text-align:center}
 
     <article class="card">
       <div class="card-top"><p class="scene">먹을거리가 줄어 떠나는 순간</p><span class="team">6모둠</span></div>
+      <p class="style">음악 스타일 · 설렘과 불안이 섞인 피아노 힙합</p>
       <p class="mind">담은 마음 · 조마조마하며 설레는 마음</p>
       <div class="bridge"><div><small>만 년 전 그때</small>먹을거리가 줄어 길을 나설 때</div><span class="arrow" aria-hidden="true">→</span><div><small>오늘의 우리</small>새 학기가 시작되는 날</div></div>
       <p class="same">조마조마하고 설레는 그 마음은 그때도 지금도 같아요.</p>
@@ -127,6 +152,7 @@ footer{margin-top:28px;font-size:13px;color:var(--muted);text-align:center}
 
     <article class="card bonus">
       <div class="card-top"><p class="scene">보너스 트랙 · 공개수업이 끝난 순간</p><span class="team">선생님</span></div>
+      <p class="style">음악 스타일 · 꽹과리가 울리는 신나는 축제 힙합</p>
       <p class="mind">담은 마음 · 기쁨! (아이들 노래를 만들다가 선생님도 몰래 한 곡 만들었어요)</p>
       <div class="bridge"><div><small>만 년 전 그때</small>드디어 쉴 곳을 찾았을 때</div><span class="arrow" aria-hidden="true">→</span><div><small>오늘의 선생님</small>동료장학 공개수업이 끝났을 때</div></div>
       <p class="quote">"드디어 끝났어 동료장학 (신나신나)"</p>
@@ -143,7 +169,7 @@ footer{margin-top:28px;font-size:13px;color:var(--muted);text-align:center}
       <li><b>느껴요</b> · 노래 속 구석기 사람은 어떤 마음이었을까요?</li>
       <li><b>이어요</b> · 나도 그런 마음을 느낀 적이 있나요? 언제였나요?</li>
     </ol>
-    <p class="promise">감상 약속 · 소리는 작게 · 한 사람이 한 곡씩 · 친구 작품에는 따뜻한 한 줄만</p>
+    <p class="promise">감상 약속 · 소리는 작게 · 친구들이 정성껏 만든 노래를 소중히 들어요 · 다른 친구에게도 차례를 나눠요</p>
   </section>
 
   <footer>5학년 1반 · 음악 「이(e)로운 음악 세상」 × 사회 「구석기 사람들의 생활」</footer>
