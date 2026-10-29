@@ -1,200 +1,286 @@
-<!doctype html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>만 년을 건너는 노래 · 만들기 체험관</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>우리 모둠 음악 주문서 · 체험판</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&display=swap">
 <style>
-:root{--ground:#F3EBDD;--ink:#2B2118;--ochre:#A8461F;--sand:#F2C48D;--card:#FFFDF8;--muted:#5A4A3C;--pick:#FBE3CF}
+/* Layout: 왼쪽은 주문서 만들기 1·2·3단계, 오른쪽은 완성 주문서와 우리 모둠 실시간 창 / 선생님 탭은 모둠별 주문 보드 */
+:root{
+  --bg:#EEF0EC; --paper:#FFFFFF; --ink:#23262A; --muted:#626A70; --line:#D6DBD6;
+  --ochre:#B4621E; --ochre-soft:#F6E6D6; --moss:#4E7353; --moss-soft:#E3EDE3; --sky:#3F6A8E; --sky-soft:#E1EAF2;
+  --display:"Black Han Sans","Gowun Dodum",system-ui,sans-serif;
+  --body:"Gowun Dodum","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#191B1D; --paper:#24272A; --ink:#ECEDEA; --muted:#A5ACAF; --line:#3A3F43;
+  --ochre:#E39350; --ochre-soft:#3D2C1E; --moss:#8DB892; --moss-soft:#22322A; --sky:#86AED0; --sky-soft:#1F2C38; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#191B1D; --paper:#24272A; --ink:#ECEDEA; --muted:#A5ACAF; --line:#3A3F43;
+  --ochre:#E39350; --ochre-soft:#3D2C1E; --moss:#8DB892; --moss-soft:#22322A; --sky:#86AED0; --sky-soft:#1F2C38; color-scheme:dark}
 *{box-sizing:border-box}
-body{margin:0;background:var(--ground);color:var(--ink);font-family:'Noto Sans KR',sans-serif;line-height:1.6}
-.wrap{max-width:760px;margin:0 auto;padding:28px 18px 56px}
-.eyebrow{margin:0;font-size:14px;font-weight:700;letter-spacing:.06em;color:var(--ochre)}
-h1{margin:4px 0 6px;font-family:'Do Hyeon',sans-serif;font-weight:400;font-size:clamp(36px,8.5vw,54px);line-height:1.1}
-.lead{margin:0 0 16px;font-size:17px;font-weight:500}
-.notice{background:var(--ink);color:var(--ground);border-radius:16px;padding:14px 18px;font-size:15px;margin-bottom:20px}
-.notice b{color:var(--sand)}
-.step{background:var(--card);border:2px solid var(--ink);border-radius:18px;padding:18px;margin-bottom:16px}
-.step h2{margin:0 0 4px;font-size:20px;display:flex;gap:10px;align-items:center}
-.num{flex-shrink:0;width:32px;height:32px;border-radius:50%;background:var(--ochre);color:#fff;font-size:16px;display:inline-flex;align-items:center;justify-content:center}
-.hint{margin:0 0 12px;font-size:14.5px;color:var(--muted)}
-.scenes{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
-.scene-btn{text-align:left;min-height:64px;padding:10px 14px;border:2px solid var(--ink);border-radius:14px;background:#fff;color:var(--ink);font:inherit;font-size:15.5px;font-weight:700;cursor:pointer}
-.scene-btn small{display:block;font-weight:400;font-size:13px;color:var(--muted)}
-.scene-btn[aria-pressed="true"]{background:var(--ink);color:var(--ground)}
-.scene-btn[aria-pressed="true"] small{color:var(--sand)}
-.group{margin-top:12px}
-.group h3{margin:0 0 6px;font-size:15px}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{min-height:44px;padding:6px 14px;border:2px solid var(--muted);border-radius:999px;background:#fff;color:var(--ink);font:inherit;font-size:15px;cursor:pointer}
-.chip[aria-pressed="true"]{background:var(--pick);border-color:var(--ochre);font-weight:700}
-.count{font-size:14px;font-weight:700;color:var(--ochre)}
-label{display:block;font-size:15px;font-weight:700;margin:10px 0 4px}
-.line{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:16px}
-input[type=text]{flex:1 1 180px;min-height:46px;padding:8px 12px;border:2px solid var(--muted);border-radius:12px;font:inherit;font-size:16px;background:#fff}
-input[type=text]:focus{outline:3px solid var(--sand);border-color:var(--ochre)}
-.fixed{font-weight:700}
-.make{display:block;width:100%;min-height:54px;margin-top:4px;border:0;border-radius:14px;background:var(--ochre);color:#fff;font:inherit;font-size:19px;font-weight:900;cursor:pointer}
-.make:disabled{background:#B9A996;cursor:not-allowed}
-.order{display:none;background:#fff;border:3px solid var(--ochre);border-radius:20px;padding:20px;margin-top:16px}
-.order.show{display:block}
-.order h2{margin:0 0 10px;font-family:'Do Hyeon',sans-serif;font-weight:400;font-size:30px;color:var(--ochre)}
-.order dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:15.5px}
-.order dt{font-weight:900}
-.order dd{margin:0}
-.lyric{margin:14px 0 0;padding:12px 14px;background:#F7EEDC;border-radius:12px;font-size:16px;font-weight:700;line-height:1.7}
-.ai{margin:12px 0 0;font-size:13.5px;color:var(--muted);word-break:break-word}
-.ai code{font-family:inherit;background:#F3EBDD;padding:1px 6px;border-radius:6px}
-.friends{margin-top:16px;padding-top:14px;border-top:2px dashed var(--muted)}
-.friends h3{margin:0 0 8px;font-size:17px}
-.friends a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px;margin-top:8px;border-radius:14px;background:var(--ink);color:var(--ground);font-weight:900;font-size:17px;text-decoration:none}
-.friends a:hover,.friends a:focus-visible{background:var(--ochre);color:#fff;outline:none}
-.friends p{margin:0;font-size:15px}
-.again{margin-top:14px;background:none;border:2px solid var(--ink);border-radius:12px;min-height:46px;width:100%;font:inherit;font-weight:700;cursor:pointer;color:var(--ink)}
-footer{margin-top:28px;font-size:13px;color:var(--muted);text-align:center}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:16px;padding-block:20px 48px}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:16px}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(1.7rem,4vw,2.4rem);margin:0}
+.sub{color:var(--muted);margin:2px 0 0}
+.hright{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pill{font-size:.85rem;font-weight:700;border-radius:999px;padding:5px 12px;border:1.5px solid var(--line);color:var(--muted)}
+.pill.on{border-color:var(--moss);color:var(--moss);background:var(--moss-soft)}
+.tabs{display:flex;gap:6px;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:4px}
+.tabs button{border:0;background:none;color:var(--muted);font:inherit;font-weight:700;padding:8px 16px;border-radius:999px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 370px;gap:20px;align-items:start}
+@media (max-width:880px){.grid{grid-template-columns:minmax(0,1fr)}}
+.col{display:grid;gap:16px;min-width:0}
+.step{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:12px;min-width:0}
+.step h2{display:flex;align-items:center;gap:10px;margin:0;font-size:1.15rem}
+.num{font-family:var(--display);font-weight:400;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--ochre);color:#fff;font-size:1.05rem;flex:none}
+.hint{color:var(--muted);font-size:.92rem;margin:0}
+.row{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--line);background:var(--paper);color:var(--ink);font:inherit;border-radius:10px;padding:7px 12px;cursor:pointer;display:grid;text-align:left;line-height:1.25;min-width:0}
+.chip small{color:var(--muted);font-size:.78rem;font-family:ui-monospace,Menlo,monospace}
+.chip:hover{border-color:var(--ochre)}
+.chip[aria-pressed="true"]{background:var(--ochre-soft);border-color:var(--ochre)}
+.chip[aria-pressed="true"] small{color:var(--ochre)}
+:is(.chip,.btn,.tabs button,input,textarea,select,summary):focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+.cat{display:grid;gap:6px;border-top:1px dashed var(--line);padding-top:10px}
+.cat:first-child{border-top:0;padding-top:0}
+.cat-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-weight:700}
+.cat-h span{color:var(--muted);font-weight:400;font-size:.85rem}
+.grp{font-size:.82rem;color:var(--muted);margin:4px 0 -2px;width:100%}
+.count{font-weight:700}.count.full{color:var(--ochre)}
+label{font-weight:700;display:grid;gap:6px}
+input,textarea,select{font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:9px 11px;width:100%}
+.because{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.because input{width:auto;flex:1 1 120px}
+.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px);display:grid;gap:14px}
+.panel{border-radius:14px;padding:18px;display:grid;gap:12px}
+.panel h2{margin:0;font-size:1.1rem}
+.p-order{background:var(--moss-soft);border:1.5px solid var(--moss)}.p-order h2{color:var(--moss)}
+.p-live{background:var(--sky-soft);border:1.5px solid var(--sky)}.p-live h2{color:var(--sky)}
+pre{white-space:pre-wrap;word-break:break-word;margin:0;font-family:var(--body);font-size:.96rem;background:var(--paper);border-radius:10px;padding:14px;border:1px solid var(--line)}
+.btn{border:0;font:inherit;font-weight:700;border-radius:10px;padding:12px 16px;cursor:pointer;background:var(--moss);color:#fff}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn.ochre{background:var(--ochre)}.btn.sky{background:var(--sky)}
+.btn.ghost{background:transparent;color:var(--muted);border:1.5px solid var(--line);padding:9px 14px}
+.btn.sm{padding:7px 11px;font-size:.88rem}
+.btns{display:flex;flex-wrap:wrap;gap:8px}
+.toast{min-height:1.3em;margin:0;font-weight:700;color:var(--moss)}
+.warn{color:var(--ochre);font-weight:700;min-height:1.3em;margin:0;font-size:.92rem}
+.badge{display:inline-block;font-size:.82rem;font-weight:700;border-radius:999px;padding:3px 10px}
+.st-none{background:var(--bg);color:var(--muted)}
+.st-received{background:var(--ochre-soft);color:var(--ochre)}
+.st-making{background:var(--sky-soft);color:var(--sky)}
+.st-done{background:var(--moss-soft);color:var(--moss)}
+.board{display:grid;align-items:start;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:14px}
+.tcard{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:8px;align-content:start;min-width:0}
+.tcard h3{margin:0;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:1.1rem}
+.tcard .meta{color:var(--muted);font-size:.85rem}
+.tcard .words{font-family:ui-monospace,Menlo,monospace;font-size:.85rem;background:var(--bg);border-radius:8px;padding:8px;word-break:break-word}
+.tcard.empty{color:var(--muted)}
+.kv{margin:0;font-size:.93rem}.kv b{color:var(--muted);font-weight:700;margin-right:4px}
+.qrbox{background:#fff;padding:10px;border-radius:10px;width:max-content;max-width:100%}
+details{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 18px}
+summary{cursor:pointer;font-weight:700}
+.steps-mini{margin:0;padding-left:1.2em;color:var(--muted);font-size:.92rem}
+.tnum{font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:no-preference){.chip,.btn{transition:background .15s,border-color .15s}}
 </style>
-</head>
-<body>
-<main class="wrap">
-  <p class="eyebrow">2026 교육활동 전시 · 5학년 1반 · 만들기 체험관</p>
-  <h1>나도 만 년을 건너는 노래 만들기</h1>
-  <p class="lead">1반 친구들이 노래를 만든 순서 그대로, 나만의 '노래 주문서'를 만들어 봐요.</p>
 
-  <p class="notice">이 주문서는 <b>어디에도 보내지지 않아요.</b> 내 화면에만 생겨요. 1반 친구들은 이렇게 만든 주문서를 선생님께 보냈고, <b>선생님이 대신 AI 작곡 도구에 넣어</b> 노래를 완성했어요. (AI 작곡 도구는 만 13세 이상만 쓸 수 있거든요.)</p>
+<style>
+.intro{background:var(--ink);color:var(--bg);border-radius:14px;padding:14px 18px;margin-bottom:16px;line-height:1.6}
+.intro b{color:#F6C38E}
+textarea{font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;width:100%;line-height:1.6}
+.p-class{background:var(--ochre-soft);border:1.5px solid var(--ochre)}.p-class h2{color:var(--ochre)}
+.songlink{display:block;text-align:center;text-decoration:none;border-radius:10px;padding:12px 14px;font-weight:700;background:var(--ink);color:var(--bg)}
+.songlink:hover,.songlink:focus-visible{background:var(--ochre);color:#fff}
+.flow{margin:0;padding-left:1.2em;font-size:.95rem}
+</style>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>우리 모둠 음악 주문서 · 체험판</h1>
+      <p class="sub">5학년 1반이 수업 때 실제로 쓴 주문서 화면 그대로예요.</p>
+    </div>
+  </header>
 
-  <section class="step" aria-labelledby="s1">
-    <h2 id="s1"><span class="num">1</span>구석기 장면 고르기</h2>
-    <p class="hint">사회 시간에 배운 구석기 사람들의 하루예요. 하나만 골라요.</p>
-    <div class="scenes" id="scenes"></div>
+  <p class="intro">수노 AI는 <b>만 13세 이상</b>만 쓸 수 있어요. 그래서 1반은 이 주문서에서 <b>장면을 고르고, 소리 단어를 고르고, 가사를 바꿔</b> 선생님께 보냈고, <b>선생님이 대신 수노 AI에 넣어</b> 노래를 완성했어요. 체험판에서 만든 주문서는 <b>어디에도 보내지지 않고 내 화면에만</b> 남아요.</p>
+
+  <section>
+    <div class="grid">
+      <div class="col">
+        <div class="step">
+          <h2><span class="num">1</span>장면 고르기</h2>
+          <p class="hint">사회 시간에 배운 구석기 사람들의 하루예요. 하나를 골라요.</p>
+          <div class="row" id="scenes"></div>
+        </div>
+        <div class="step">
+          <h2><span class="num">2</span>소리 단어 고르기</h2>
+          <p class="hint">원하는 칸에서 골라요. 모두 합쳐 <b>10개까지</b>, 목소리는 꼭 하나만! 지금 <span class="count tnum" id="count">0</span>/10</p>
+          <div id="cats" style="display:grid;gap:12px"></div>
+          <div class="cat">
+            <div class="cat-h">우리만의 단어<span>1개, 영어로 쓰면 더 잘 알아들어요</span></div>
+            <input id="custom" maxlength="40" placeholder="예) mammoth footsteps, 모닥불 옆 노래">
+          </div>
+          <p class="warn" id="warn" aria-live="polite"></p>
+        </div>
+        <div class="step">
+          <h2><span class="num">3</span>담고 싶은 마음과 까닭</h2>
+          <label for="mind">담고 싶은 마음<input id="mind" maxlength="100" placeholder="예) 숨죽인 긴장, 가족을 지키고 싶은 마음"></label>
+          <div>
+            <label for="r1" style="margin-bottom:6px">이 단어를 고른 까닭</label>
+            <div class="because"><input id="r1" maxlength="40" placeholder="빠른 북"> 소리로 <input id="r2" maxlength="40" placeholder="숨죽인 긴장"> 마음을 나타내고 싶어서</div>
+          </div>
+        </div>
+        <div class="step">
+          <h2><span class="num">4</span>가사 바꾸기</h2>
+          <p class="hint">장면을 고르면 기본 가사가 들어와요. 우리 말로 자유롭게 고쳐요. 아래 버튼을 누르면 <b>그때와 지금을 잇는 줄</b>이 들어가요.</p>
+          <textarea id="lyrics" rows="10" placeholder="장면을 먼저 골라요"></textarea>
+          <div class="because">
+            <span>오늘 우리는</span><input id="now" maxlength="40" placeholder="예) 새 학기 첫날 교실에 들어갈 때">
+          </div>
+          <div class="because">
+            <input id="feel" maxlength="30" placeholder="예) 떨리고 설레는"><span>그 마음은 그때도 지금도 같아</span>
+          </div>
+          <div class="btns"><button class="btn ochre sm" id="bridge" type="button">그때·지금 가사 넣기</button></div>
+        </div>
+      </div>
+
+      <aside class="side">
+        <div class="panel p-order">
+          <h2>완성된 주문서</h2>
+          <pre id="out"></pre>
+          <div class="btns">
+            <button class="btn" id="done" type="button">주문서 완성!</button>
+          </div>
+          <p class="toast" id="toast" aria-live="polite"></p>
+          <button class="btn ghost sm" id="reset" type="button">처음부터 다시 고르기</button>
+        </div>
+        <div class="panel p-class" id="classPanel" hidden>
+          <h2>1반에서는 그다음에…</h2>
+          <ol class="flow">
+            <li>모둠이 이 주문서를 선생님께 보냈어요.</li>
+            <li>선생님이 고른 단어는 수노 AI의 <b>스타일</b> 칸에, 가사는 <b>가사</b> 칸에 넣었어요.</li>
+            <li>완성된 노래를 반 친구들과 함께 듣고, 나의 삶과 이어 보았어요.</li>
+          </ol>
+          <div id="classSongs" style="display:grid;gap:8px"></div>
+        </div>
+      </aside>
+    </div>
   </section>
-
-  <section class="step" aria-labelledby="s2">
-    <h2 id="s2"><span class="num">2</span>소리 단어 고르기 <span class="count" id="count">0 / 6</span></h2>
-    <p class="hint">그 장면의 마음이 어떤 소리일지 상상하며 <b>최대 6개</b>까지 골라요.</p>
-    <div id="groups"></div>
-  </section>
-
-  <section class="step" aria-labelledby="s3">
-    <h2 id="s3"><span class="num">3</span>그때와 지금 잇기</h2>
-    <p class="hint">만 년 전 사람의 마음과 비슷한 마음을 느꼈던 <b>나의 순간</b>을 떠올려요.</p>
-    <div class="line"><span class="fixed">만 년 전</span><span class="fixed" id="sceneText">(장면을 골라요)</span></div>
-    <label for="now">오늘 우리는 언제 그런 마음이 들까요?</label>
-    <div class="line"><span class="fixed">오늘 우리는</span><input type="text" id="now" maxlength="30" placeholder="예) 새 학기 첫날 교실에 들어갈 때"></div>
-    <label for="feel">그 마음을 한두 낱말로 써요</label>
-    <div class="line"><input type="text" id="feel" maxlength="20" placeholder="예) 떨리고 설레는"><span class="fixed">그 마음은 그때도 지금도 같아</span></div>
-  </section>
-
-  <button class="make" id="makeBtn" type="button" disabled>내 노래 주문서 만들기</button>
-  <p class="hint" id="need" style="text-align:center;margin-top:6px">장면 1개와 소리 단어 1개 이상, 두 칸을 채우면 버튼이 켜져요.</p>
-
-  <section class="order" id="order" aria-live="polite" aria-labelledby="orderTitle">
-    <h2 id="orderTitle">나의 노래 주문서</h2>
-    <dl>
-      <dt>장면</dt><dd id="oScene"></dd>
-      <dt>소리</dt><dd id="oWords"></dd>
-    </dl>
-    <p class="lyric" id="oLyric"></p>
-    <p class="ai">AI에게는 이렇게 영어 단어로 부탁해요 · <code id="oPrompt"></code></p>
-    <div class="friends" id="friends"></div>
-    <button class="again" id="again" type="button">처음부터 다시 만들기</button>
-  </section>
-
-  <footer>5학년 1반 · 음악 「이(e)로운 음악 세상」 × 사회 「구석기 사람들의 생활」</footer>
-</main>
+</div>
 
 <script>
-(function(){
-  var LISTEN_URL = './';
-  var SCENES = [
-    {id:'hunt', name:'사냥감을 발견한 순간', desc:'멀리 동물이 보여, 숨죽이고 기다려', songs:[['1모둠','https://suno.com/s/ELopokUBqyTTfww9'],['3모둠','https://suno.com/s/skbhUv1uP9bvicLM']]},
-    {id:'fruit', name:'열매를 따고 뿌리를 캐는 순간', desc:'숲과 들에서 먹을거리를 찾아', songs:[]},
-    {id:'tool', name:'돌을 깨며 도구를 만드는 순간', desc:'돌을 두드려 날을 만들어', songs:[['4모둠','https://suno.com/s/xDXlTiEQbqq2eXYA']]},
-    {id:'stay', name:'머물 곳을 찾는 순간', desc:'동굴과 바위 그늘을 살펴봐', songs:[]},
-    {id:'leave', name:'먹을거리가 줄어 떠나는 순간', desc:'익숙한 곳을 뒤로하고 길을 나서', songs:[['2모둠','https://suno.com/s/SSrzsoXVVrrrn5nB'],['6모둠','https://suno.com/s/obA1eDejiYjJUwrm']]},
-    {id:'arrive', name:'새로운 곳에 도착한 순간', desc:'처음 보는 강가와 숲 앞에 서', songs:[['5모둠','https://suno.com/s/XPZh9XApW7CS5W4K']]}
-  ];
-  var GROUPS = [
-    {title:'노래 종류', words:[['케이팝','k-pop'],['힙합','hip hop'],['발라드','ballad'],['동화 같은','fairytale'],['드라마 OST','k-drama ost']]},
-    {title:'느낌', words:[['신나는','exciting'],['긴장된','tense'],['희망찬','hopeful'],['아쉬운','nostalgic'],['무서운','scared'],['뿌듯한','proud']]},
-    {title:'악기', words:[['큰북','deep taiko drums'],['피아노','piano'],['칼림바','kalimba'],['꽹과리','kkwaenggwari'],['통기타','acoustic guitar'],['손뼉','hand claps']]},
-    {title:'목소리', words:[['어린이 합창','children\'s choir'],['부드러운 남자 목소리','soft male vocal'],['힘찬 목소리','powerful vocal'],['남녀 함께 부르기','male and female duet'],['연주만','instrumental']]},
-    {title:'자연 소리', words:[['동물 울음','animal calls'],['나뭇잎 바스락','rustling leaves'],['빗소리','rain sounds'],['동굴 메아리','cave echo'],['흐르는 강물','flowing river']]}
-  ];
-  var MAX = 6;
-  var state = {scene:null, words:[]};
-  var $ = function(id){return document.getElementById(id);};
+const SCENES = [
+  ["돌을 깨며 도구를 만드는 순간","손에 쥔 돌을 이리저리 살펴보고\n다른 돌로 두드려 모양을 바꿔\n조금씩 깨지고 날이 생겨나면\n우리에게 필요한 도구가 되네\n이 돌로 무엇을 할 수 있을까\n한 번 더 살피고 다시 두드려\n작은 돌 하나가 달라지는 순간\n우리의 하루도 달라져 가"],
+  ["열매를 따고 뿌리를 캐는 순간","나뭇가지 사이로 열매를 찾고\n땅속의 뿌리를 조심스레 캐네\n손에 모인 먹을거리를 바라보며\n오늘 걸어온 길을 돌아봐\n여기에는 무엇이 더 있을까\n저쪽으로 조금 더 가 볼까\n숲과 들을 살피는 우리의 눈\n오늘의 먹을거리를 찾아가"],
+  ["사냥감을 발견한 순간","멀리 움직이는 동물이 보여\n걸음을 멈추고 가만히 바라봐\n손에 쥔 뗀석기를 다시 살피며\n다가갈 때를 기다리고 있어\n지금일까 조금 더 기다릴까\n작은 움직임에도 눈을 떼지 못해\n먹을거리를 구하러 나선 이 길\n오늘은 어떤 일이 기다릴까"],
+  ["머물 곳을 찾는 순간","동굴과 바위 그늘을 살펴보고\n오늘 머물 곳을 찾아 걸어가\n나무와 가죽으로 막집을 세우면\n잠시 쉬어 갈 자리가 생겨\n밖에서 불어오는 바람을 듣고\n우리가 머물 곳을 돌아봐\n오늘은 이곳에서 쉬어 가자\n내일의 길은 내일 다시 찾아"],
+  ["먹을거리가 줄어 떠나는 순간","열매를 찾던 곳을 다시 살펴도\n예전처럼 먹을 것이 보이지 않아\n머물던 막집을 뒤로하고\n새로운 곳을 찾아 길을 나서\n익숙한 풍경이 멀어져 가고\n처음 보는 길이 앞에 펼쳐져\n어디에서 다시 머물게 될까\n우리는 다시 길을 나서"],
+  ["새로운 곳에 도착한 순간","오래 걸어 새로운 곳에 닿아\n강가와 숲을 천천히 살펴봐\n먹을거리와 머물 곳을 찾으며\n이곳에서의 하루를 생각해\n어떤 열매가 자라고 있을까\n어디에서 잠시 쉬어 갈까\n처음 보는 풍경 속에 서서\n우리의 다음 이야기를 시작해"],
+];
+const CATS = [
+  {id:"genre",name:"장르",max:2,words:[["케이팝","k-pop"],["케이힙합","k-hip hop"],["케이팝 댄스","k-pop dance"],["댄스 팝","dance pop"],["발라드","k-ballad"],["드라마 OST","k-drama ost"],["펑크","funk"],["부족 음악","tribal"],["민속 음악","folk"],["국악풍","korean traditional"],["영화 음악","cinematic"],["판타지","fantasy"],["동화 같은 음악","fairytale"],["게임 음악","video game music"],["자장가","lullaby"],["행진곡","march"],["잔잔한 배경 음악","ambient"],["오케스트라","orchestral"],["어쿠스틱 팝","acoustic pop"],["아카펠라","a cappella"],["재즈","jazz"],["록","rock"],["힙합","hip hop"],["세계 음악","world music"],["동요","children's song"]]},
+  {id:"mood",name:"느낌",max:2,words:[["조마조마","tense"],["겁먹은","scared"],["두근두근","exciting"],["설레는","hopeful"],["희망찬","uplifting"],["행복한","happy"],["신나는","joyful"],["장난스러운","playful"],["뿌듯한","proud"],["용감한","brave"],["힘찬","powerful"],["웅장한","epic"],["포근한","warm"],["평화로운","peaceful"],["차분한","calm"],["고마운","grateful"],["궁금한","curious"],["신비로운","mysterious"],["꿈꾸는 듯한","dreamy"],["놀란","surprised"],["화난","angry"],["쓸쓸한","lonely"],["슬픈","sad"],["그리운","nostalgic"]]},
+  {id:"inst",name:"악기",max:3,groups:[
+    ["두드리는 소리",[["북","tribal drums"],["큰 북","deep taiko drums"],["장구","janggu"],["꽹과리","kkwaenggwari"],["징","jing gong"],["손뼉","hand claps"],["딸랑이","shakers"],["돌과 나무 소리","stone and wood percussion"],["마림바","marimba"],["실로폰","xylophone"],["칼림바","kalimba"],["종소리","bells"]]],
+    ["부는 소리",[["나무 피리","wooden flute"],["뼈 피리","bone flute"],["대금","daegeum"],["오카리나","ocarina"],["디저리두","didgeridoo"],["트럼펫","trumpet"],["호른","french horn"]]],
+    ["줄을 켜고 뜯는 소리",[["기타","acoustic guitar"],["우쿨렐레","ukulele"],["가야금","gayageum"],["해금","haegeum"],["바이올린","strings"],["첼로","cello"],["하프","harp"]]],
+    ["건반과 전자 소리",[["피아노","piano"],["신디사이저","synthesizer"],["레인스틱","rain stick"]]]]},
+  {id:"tempo",name:"빠르기",max:1,words:[["아주 느리게","very slow"],["느리게","slow"],["걷는 빠르기","walking pace"],["보통","medium tempo"],["빠르게","fast"],["아주 빠르게","very fast"],["점점 빠르게","building up"],["점점 느리게","slowing down"]]},
+  {id:"rhythm",name:"리듬",max:1,words:[["쿵쿵 발 구르기","stomping rhythm"],["일정한 박자","steady beat"],["통통 튀는","bouncy rhythm"],["흔들흔들","swaying rhythm"],["왈츠(쿵짝짝)","waltz"],["둥둥 심장 소리","heartbeat rhythm"]]},
+  {id:"dyn",name:"소리 크기",max:1,words:[["아주 작고 조용히","very soft and quiet"],["부드럽게","gentle"],["크고 힘차게","loud and bold"],["점점 커지게","crescendo"],["점점 작아지게","fading out"]]},
+  {id:"voice",name:"목소리",max:1,groups:[
+    ["남자 목소리",[["낮은 남자 목소리","deep male vocal"],["부드러운 남자 목소리","soft male vocal"],["힘찬 남자 목소리","powerful male vocal"],["속삭이는 남자 목소리","whispering male vocal"]]],
+    ["여자 목소리",[["맑은 여자 목소리","clear female vocal"],["부드러운 여자 목소리","soft female vocal"],["힘찬 여자 목소리","powerful female vocal"],["속삭이는 여자 목소리","whispering female vocal"]]],
+    ["함께 부르기",[["남녀 함께","male and female duet"],["어린이 합창","children's choir"],["여럿이 외치기","group chant"],["케이팝 그룹 보컬","k-pop group vocals"],["허밍","humming"],["목소리 없이 연주만","instrumental"]]]]},
+  {id:"nature",name:"자연 소리",max:2,words:[["새소리","birdsong"],["바람 소리","wind sounds"],["물 흐르는 소리","flowing river"],["파도 소리","ocean waves"],["빗소리","rain sounds"],["천둥 소리","thunder"],["모닥불 소리","crackling fire"],["발자국 소리","footsteps"],["나뭇잎 바스락","rustling leaves"],["풀벌레 소리","crickets"],["동물 울음소리","animal calls"]]},
+  {id:"air",name:"분위기",max:1,words:[["동굴 속 울림","cave echo"],["넓은 들판","wide open field"],["깊은 숲","deep forest"],["아침 햇살","morning"],["해 질 녘","sunset"],["밤","night"],["별이 빛나는 밤","starry night"],["눈 오는 날","snowy"],["따뜻한 봄","spring"],["아주 옛날 이야기","ancient folk"]]},
+  {id:"flow",name:"노래 흐름",max:1,words:[["조용히 시작해 크게 끝나기","soft intro, big ending"],["악기 연주로 시작","instrumental intro"],["마지막은 조용히","quiet ending"],["따라 부르기 쉬운 후렴","catchy chorus"],["주고받으며 부르기","call and response"],["짧고 굵게","short and punchy"],["킬링 파트","killing part hook"],["랩 넣기","rap verse"],["크게 끝나기","big ending"],["조용히 시작","soft intro"]]},
+];
+const ORDER = CATS.map(c=>c.id);
+const MAXW = 10;
+const LISTEN = "./";
+const CLASS_SONGS = {
+  "사냥감을 발견한 순간":[["1모둠","https://suno.com/s/ELopokUBqyTTfww9"],["3모둠","https://suno.com/s/skbhUv1uP9bvicLM"]],
+  "돌을 깨며 도구를 만드는 순간":[["4모둠","https://suno.com/s/xDXlTiEQbqq2eXYA"]],
+  "먹을거리가 줄어 떠나는 순간":[["2모둠","https://suno.com/s/SSrzsoXVVrrrn5nB"],["6모둠","https://suno.com/s/obA1eDejiYjJUwrm"]],
+  "새로운 곳에 도착한 순간":[["5모둠","https://suno.com/s/XPZh9XApW7CS5W4K"]]
+};
+const $ = (id)=>document.getElementById(id);
+const st = {scene:null,pick:{}};
+ORDER.forEach(k=>st.pick[k]=[]);
 
-  function el(tag, cls, text){var e=document.createElement(tag); if(cls) e.className=cls; if(text!=null) e.textContent=text; return e;}
-
-  SCENES.forEach(function(s){
-    var b = el('button','scene-btn'); b.type='button'; b.setAttribute('aria-pressed','false');
-    b.appendChild(document.createTextNode(s.name)); b.appendChild(el('small',null,s.desc));
-    b.addEventListener('click', function(){
-      state.scene = s;
-      document.querySelectorAll('.scene-btn').forEach(function(x){x.setAttribute('aria-pressed', x===b?'true':'false');});
-      $('sceneText').textContent = s.name;
-      update();
-    });
-    $('scenes').appendChild(b);
+function chip(label, sub, pressed, onClick){
+  const b=document.createElement("button");b.type="button";b.className="chip";b.setAttribute("aria-pressed",pressed?"true":"false");
+  const a=document.createElement("span");a.textContent=label;b.append(a);
+  if(sub){const s=document.createElement("small");s.textContent=sub;b.append(s)}
+  b.addEventListener("click",onClick);return b;
+}
+function customWord(){return $("custom").value.trim()}
+function total(){return ORDER.reduce((n,k)=>n+st.pick[k].length,0)+(customWord()?1:0)}
+function words(){const w=ORDER.flatMap(k=>st.pick[k]);if(customWord())w.push(customWord());return w.join(", ")}
+function reason(){return ($("r1").value.trim()||"___")+" 소리로 "+($("r2").value.trim()||"___")+" 마음을 나타내고 싶어서"}
+function orderText(){
+  return "🎵 나의 주문서\n장면: "+(st.scene!==null?SCENES[st.scene][0]:"")+"\n담고 싶은 마음: "+$("mind").value.trim()+"\n붙여넣은 단어: "+words()+"\n고른 까닭: "+reason()+"\n\n가사:\n"+$("lyrics").value.trim();
+}
+function render(){
+  const sc=$("scenes");sc.innerHTML="";
+  SCENES.forEach(([n],i)=>sc.append(chip(n,null,st.scene===i,()=>{
+    if(st.scene!==i){st.scene=i;$("lyrics").value=SCENES[i][1];}
+    render();
+  })));
+  const cats=$("cats");cats.innerHTML="";
+  CATS.forEach(c=>{
+    const box=document.createElement("div");box.className="cat";
+    const h=document.createElement("div");h.className="cat-h";h.textContent=c.name;
+    const s=document.createElement("span");s.textContent=c.max+"개까지";h.append(s);box.append(h);
+    const row=document.createElement("div");row.className="row";
+    const add=(ko,en)=>row.append(chip(ko,en,st.pick[c.id].includes(en),()=>toggle(c,en)));
+    if(c.groups)c.groups.forEach(([g,ws])=>{const t=document.createElement("div");t.className="grp";t.textContent=g;row.append(t);ws.forEach(([k,e])=>add(k,e))});
+    else c.words.forEach(([k,e])=>add(k,e));
+    box.append(row);cats.append(box);
   });
-
-  GROUPS.forEach(function(g){
-    var wrap = el('div','group'); wrap.appendChild(el('h3',null,g.title));
-    var chips = el('div','chips');
-    g.words.forEach(function(w){
-      var c = el('button','chip',w[0]); c.type='button'; c.setAttribute('aria-pressed','false');
-      c.addEventListener('click', function(){
-        var i = state.words.findIndex(function(x){return x[0]===w[0];});
-        if(i>=0){state.words.splice(i,1); c.setAttribute('aria-pressed','false');}
-        else if(state.words.length<MAX){state.words.push(w); c.setAttribute('aria-pressed','true');}
-        else {$('count').textContent = '6개까지만 골라요!'; setTimeout(update,1200); return;}
-        update();
-      });
-      chips.appendChild(c);
-    });
-    wrap.appendChild(chips); $('groups').appendChild(wrap);
-  });
-
-  ['now','feel'].forEach(function(id){ $(id).addEventListener('input', update); });
-
-  function ready(){ return state.scene && state.words.length>0 && $('now').value.trim() && $('feel').value.trim(); }
-  function update(){
-    $('count').textContent = state.words.length + ' / ' + MAX;
-    $('makeBtn').disabled = !ready();
-    $('need').style.display = ready() ? 'none' : 'block';
+  updateOut();
+}
+function updateOut(){const n=total();$("count").textContent=n;$("count").classList.toggle("full",n>=MAXW);$("out").textContent=orderText()}
+function toggle(c,en){
+  const arr=st.pick[c.id];$("warn").textContent="";
+  if(arr.includes(en)){arr.splice(arr.indexOf(en),1)}
+  else if(c.max===1&&arr.length===1){arr.splice(0,1,en)}
+  else{
+    if(arr.length>=c.max){$("warn").textContent=c.name+"은(는) "+c.max+"개까지 고를 수 있어요.";return}
+    if(total()>=MAXW){$("warn").textContent="단어는 10개까지예요. 다른 단어를 하나 빼고 골라요.";return}
+    arr.push(en);
   }
-
-  $('makeBtn').addEventListener('click', function(){
-    if(!ready()) return;
-    var s = state.scene;
-    $('oScene').textContent = s.name;
-    $('oWords').textContent = state.words.map(function(w){return w[0];}).join(' · ');
-    $('oPrompt').textContent = state.words.map(function(w){return w[1];}).join(', ');
-    $('oLyric').textContent = '만 년 전 ' + s.name + ' / 오늘 우리는 ' + $('now').value.trim() + ' / ' + $('feel').value.trim() + ' 그 마음은 그때도 지금도 같아';
-    var f = $('friends'); f.textContent='';
-    if(s.songs.length){
-      f.appendChild(el('h3',null,'같은 장면으로 1반 친구들이 만든 노래'));
-      f.appendChild(el('p',null,'내가 고른 소리와 친구들의 소리는 어떻게 다를까요? 들어 보고 비교해 봐요.'));
-      s.songs.forEach(function(x){ var a=el('a',null,'▶ ' + x[0] + ' 노래 듣기'); a.href=x[1]; a.target='_blank'; a.rel='noopener'; f.appendChild(a); });
-    } else {
-      f.appendChild(el('h3',null,'이 장면은 아직 노래가 없어요'));
-      f.appendChild(el('p',null,'1반에서는 아무도 이 장면으로 노래를 완성하지 않았어요. 네 주문서가 이 장면의 첫 노래 아이디어예요!'));
-    }
-    var all = el('a',null,'1반 노래 6곡 모두 들으러 가기'); all.href=LISTEN_URL; all.target='_blank'; all.rel='noopener'; f.appendChild(all);
-    $('order').classList.add('show');
-    $('order').scrollIntoView({behavior:'smooth', block:'start'});
-  });
-
-  $('again').addEventListener('click', function(){
-    state = {scene:null, words:[]};
-    document.querySelectorAll('[aria-pressed]').forEach(function(x){x.setAttribute('aria-pressed','false');});
-    $('now').value=''; $('feel').value=''; $('sceneText').textContent='(장면을 골라요)';
-    $('order').classList.remove('show'); update(); window.scrollTo({top:0,behavior:'smooth'});
-  });
-  update();
-})();
+  render();
+}
+["mind","r1","r2","custom","lyrics"].forEach(id=>$(id).addEventListener("input",()=>{
+  if(id==="custom"&&total()>MAXW){$("custom").value="";$("warn").textContent="단어가 이미 10개라 우리만의 단어를 넣을 수 없어요."}
+  updateOut();
+}));
+function flash(el,msg){el.textContent=msg;clearTimeout(el._t);el._t=setTimeout(()=>{el.textContent=""},4000)}
+$("bridge").addEventListener("click",()=>{
+  if(st.scene===null){flash($("toast"),"장면을 먼저 골라요.");return}
+  const now=$("now").value.trim()||"○○할 때", feel=$("feel").value.trim()||"○○한";
+  const add="만 년 전 "+SCENES[st.scene][0]+"\n오늘 우리는 "+now+"\n"+feel+" 그 마음은 그때도 지금도 같아";
+  const t=$("lyrics");t.value=(t.value.trim()?t.value.trim()+"\n":"")+add;updateOut();
+  flash($("toast"),"그때·지금 가사를 넣었어요. 우리 말로 다듬어 봐요.");
+});
+$("done").addEventListener("click",()=>{
+  if(st.scene===null){flash($("toast"),"장면을 먼저 골라요.");return}
+  if(!words()){flash($("toast"),"소리 단어를 하나 이상 골라요.");return}
+  if(!st.pick.voice.length){flash($("toast"),"목소리를 하나 골라요.");return}
+  const box=$("classSongs");box.innerHTML="";
+  const name=SCENES[st.scene][0], list=CLASS_SONGS[name]||[];
+  const p=document.createElement("p");p.style.margin="4px 0 0";p.style.fontWeight="700";
+  p.textContent=list.length?"같은 장면으로 1반 친구들이 만든 노래예요. 내가 고른 소리와 비교해 들어 봐요.":"1반에서는 이 장면으로 완성한 노래가 없어요. 내 주문서가 이 장면의 첫 노래 아이디어예요!";
+  box.append(p);
+  list.forEach(([t,u])=>{const a=document.createElement("a");a.className="songlink";a.href=u;a.target="_blank";a.rel="noopener";a.textContent="▶ "+t+" 노래 듣기";box.append(a)});
+  const all=document.createElement("a");all.className="songlink";all.href=LISTEN;all.textContent="1반 노래 모두 들으러 가기";box.append(all);
+  const hint=document.createElement("p");hint.className="hint";hint.textContent="노래 페이지가 열리면 화면의 재생 버튼(▶)을 눌러 주세요.";box.append(hint);
+  $("classPanel").hidden=false;
+  flash($("toast"),"주문서 완성! 1반에서는 이 주문서로 노래를 만들었어요.");
+  $("classPanel").scrollIntoView({behavior:"smooth",block:"nearest"});
+});
+$("reset").addEventListener("click",()=>{st.scene=null;ORDER.forEach(k=>st.pick[k]=[]);["mind","r1","r2","custom","lyrics","now","feel"].forEach(id=>$(id).value="");$("warn").textContent="";$("classPanel").hidden=true;render()});
+render();
 </script>
-</body>
-</html>
